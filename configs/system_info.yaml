@@ -1,0 +1,59 @@
+version: "1.0"
+target:
+  name: "SystemInfo"
+  mode: "live"
+
+pipeline:
+  - id: "hostname"
+    name: "Get Hostname"
+    action: "system"
+    parameters:
+      command: "hostname"
+    store_as: "host"
+
+  - id: "print_hostname"
+    name: "Print Hostname"
+    action: "print"
+    parameters:
+      message: "Hostname: ${host}"
+
+  - id: "memory_info"
+    name: "Memory Info"
+    action: "system"
+    parameters:
+      command: "free -h"
+    store_as: "mem"
+
+  - id: "print_memory"
+    name: "Print Memory Info"
+    action: "print"
+    parameters:
+      message: "Memory:\n${mem}"
+
+  - id: "cpu_info"
+    name: "CPU Info (first 10 lines)"
+    action: "system"
+    parameters:
+      command: "lscpu"
+      max_lines: 10
+    store_as: "cpu"
+
+  - id: "print_cpu"
+    name: "Print CPU Info"
+    action: "print"
+    parameters:
+      message: "CPU:\n${cpu}"
+
+  - id: "cpu_cores"
+    name: "CPU Cores with pipe"
+    action: "system"
+    parameters:
+      command: "lscpu | grep 'CPU(s):'"
+      use_shell: true
+    store_as: "cores"
+
+  - id: "print_cores"
+    name: "Print CPU Cores"
+    action: "print"
+    parameters:
+      message: "CPU Cores: ${cores}"

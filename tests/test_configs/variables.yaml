@@ -1,0 +1,11 @@
+version: "1.0"
+variables:
+  user: "admin"
+  home: "/home/admin"
+
+pipeline:
+  - id: "welcome"
+    name: "Welcome"
+    action: "print"
+    parameters:
+      message: "Welcome ${user}, your home is ${home}"

@@ -1,0 +1,24 @@
+version: "1.0"
+variables:
+  debug: true
+  threshold: 100
+
+pipeline:
+  - id: "check_debug"
+    name: "Check Debug Mode"
+    action: "print"
+    parameters:
+      message: "Debug mode is: ${debug}"
+
+  - id: "conditional_step"
+    name: "Conditional Step"
+    action: "print"
+    parameters:
+      message: "This runs only if condition is met"
+    condition: "${debug} == true"
+
+  - id: "threshold_check"
+    name: "Threshold Check"
+    action: "print"
+    parameters:
+      message: "Threshold value: ${threshold}"

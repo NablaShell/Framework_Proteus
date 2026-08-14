@@ -1,0 +1,18 @@
+version: "1.0"
+target:
+  name: "TestTarget"
+  mode: "file"
+
+pipeline:
+  - id: "step1"
+    name: "First Step"
+    action: "print"
+    parameters:
+      message: "Step 1"
+    store_as: "result1"
+
+  - id: "step2"
+    name: "Second Step"
+    action: "print"
+    parameters:
+      message: "Step 2: ${result1}"

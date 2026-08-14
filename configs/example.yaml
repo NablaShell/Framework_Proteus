@@ -1,0 +1,50 @@
+version: "1.0"
+target:
+  name: "ExampleTarget"
+  mode: "file"
+
+variables:
+  app_name: "MyAnalysis"
+  version: "1.0.0"
+  debug_mode: true
+
+pipeline:
+  - id: "welcome"
+    name: "Print Welcome Message"
+    action: "print"
+    parameters:
+      message: "Welcome to ${app_name} v${version}!"
+    store_as: "welcome_msg"
+
+  - id: "system_check"
+    name: "Check System"
+    action: "system"
+    parameters:
+      command: "uname -a"
+    store_as: "system_info"
+
+  - id: "show_system"
+    name: "Show System Info"
+    action: "print"
+    parameters:
+      message: "System: ${system_info}"
+
+  - id: "set_counter"
+    name: "Initialize Counter"
+    action: "set_variable"
+    parameters:
+      name: "counter"
+      value: 10
+    store_as: "initial_counter"
+
+  - id: "show_counter"
+    name: "Display Counter"
+    action: "get_variable"
+    parameters:
+      name: "counter"
+
+  - id: "pause"
+    name: "Brief Pause"
+    action: "sleep"
+    parameters:
+      duration_ms: 100

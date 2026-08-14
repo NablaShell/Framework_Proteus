@@ -1,0 +1,48 @@
+version: "1.0"
+target:
+  name: "ScriptTest"
+  mode: "live"
+
+variables:
+  app_name: "LuaJIT Test"
+  threshold: 75
+
+pipeline:
+  - id: "init"
+    name: "Initialize"
+    action: "set_variable"
+    parameters:
+      name: "status"
+      value: "ready"
+
+  - id: "run_lua_script"
+    name: "Run Lua Script"
+    action: "script"
+    parameters:
+      script: |
+        framework.print("Starting from YAML config")
+        framework.print("App name: " .. framework.get_var("app_name"))
+        
+        local result = framework.exec("echo 'Hello from system command'")
+        if result.success then
+            framework.set_var("command_output", result.stdout)
+        end
+        
+        return "Script executed successfully"
+    store_as: "script_result"
+    depends_on: ["init"]
+
+  - id: "process_data"
+    name: "Process Data with Lua"
+    action: "lua"
+    parameters:
+      script_path: "scripts/data_processing.lua"
+    store_as: "processing_result"
+    depends_on: ["run_lua_script"]
+
+  - id: "final_output"
+    name: "Final Output"
+    action: "print"
+    parameters:
+      message: "Script result: ${script_result}"
+    depends_on: ["process_data"]

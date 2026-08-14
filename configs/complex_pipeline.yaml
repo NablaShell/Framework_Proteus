@@ -1,0 +1,60 @@
+version: "1.0"
+target:
+  name: "ComplexTarget"
+  mode: "live"
+  parameters:
+    pid: "1234"
+    address: "0x7f1234567890"
+
+variables:
+  analysis_name: "Complex Analysis"
+  max_iterations: 1000
+  timeout_ms: 5000
+
+pipeline:
+  - id: "init"
+    name: "Initialize Analysis"
+    action: "set_variable"
+    parameters:
+      name: "status"
+      value: "initialized"
+    store_as: "init_status"
+
+  - id: "system_prepare"
+    name: "Prepare System"
+    action: "system"
+    parameters:
+      command: "echo 'System ready'"
+    store_as: "system_status"
+
+  - id: "show_status"
+    name: "Show Status"
+    action: "print"
+    parameters:
+      message: "Status: ${status}, System: ${system_status}"
+
+  - id: "set_parameters"
+    name: "Set Parameters"
+    action: "set_variable"
+    parameters:
+      name: "max_iterations_str"
+      value: "Max iterations: ${max_iterations}"
+
+  - id: "show_parameters"
+    name: "Show Parameters"
+    action: "print"
+    parameters:
+      message: "${max_iterations_str}, Timeout: ${timeout_ms}ms"
+
+  - id: "pause"
+    name: "Analysis Pause"
+    action: "sleep"
+    parameters:
+      duration_ms: 50
+
+  - id: "finish"
+    name: "Finish Analysis"
+    action: "print"
+    parameters:
+      message: "Analysis complete!"
+    store_as: "final_message"

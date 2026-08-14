@@ -1,0 +1,32 @@
+[package]
+name = "framework-proteus"
+version = "1.0.0"
+edition = "2021"
+description = "Declarative analysis framework"
+license = "Project Proteus Core Source-Available License Agreement v1.0"
+authors = ["NablaShell"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.10"
+chrono = "0.4"
+petgraph = "0.6"
+rayon = "1.8"
+parking_lot = "0.12"
+mlua = { version = "0.9", features = ["luajit", "vendored"] }
+libc = "0.2"
+memmap2 = "0.9"
+hex = "0.4"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.52", features = ["Win32_System_Diagnostics_Debug", "Win32_System_Threading", "Win32_Foundation"] }
+
+[dev-dependencies]
+tempfile = "3.0"
+assert_cmd = "2.0"
+predicates = "3.0"
+criterion = "0.5"

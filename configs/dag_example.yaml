@@ -1,0 +1,64 @@
+version: "1.0"
+target:
+  name: "DAG Example"
+  mode: "file"
+
+variables:
+  app_name: "DAG Test"
+  threshold: 100
+
+pipeline:
+  # Уровень 1 - независимые шаги
+  - id: "init_a"
+    name: "Initialize A"
+    action: "set_variable"
+    parameters:
+      name: "value_a"
+      value: "A"
+      
+  - id: "init_b"
+    name: "Initialize B"
+    action: "set_variable"
+    parameters:
+      name: "value_b"
+      value: "B"
+      
+  - id: "init_c"
+    name: "Initialize C"
+    action: "set_variable"
+    parameters:
+      name: "value_c"
+      value: "C"
+
+  # Уровень 2 - зависит от уровня 1
+  - id: "combine_ab"
+    name: "Combine A and B"
+    action: "set_variable"
+    parameters:
+      name: "combined_ab"
+      value: "${value_a}${value_b}"
+    depends_on: ["init_a", "init_b"]
+    
+  - id: "check_threshold"
+    name: "Check Threshold"
+    action: "if"
+    parameters:
+      condition: "${threshold} >= 100"
+    depends_on: ["init_c"]
+    store_as: "threshold_met"
+
+  # Уровень 3 - зависит от уровня 2
+  - id: "final_result"
+    name: "Final Result"
+    action: "set_variable"
+    parameters:
+      name: "final"
+      value: "${combined_ab}${value_c}"
+    depends_on: ["combine_ab", "init_c"]
+    
+  - id: "show_result"
+    name: "Show Result"
+    action: "print"
+    parameters:
+      message: "Final: ${final}, Threshold met: ${threshold_met}"
+    depends_on: ["final_result", "check_threshold"]

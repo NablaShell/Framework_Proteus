@@ -1,0 +1,63 @@
+# ===== Rust =====
+/target/
+**/*.rs.bk
+*.pdb
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.iml
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+Desktop.ini
+.directory
+
+# ===== Логи =====
+*.log
+*.tmp
+
+# ===== Документация =====
+target/doc/
+
+# ===== Бенчмарки =====
+benchmark_results/
+*.bench
+
+# ===== Профилирование =====
+*.prof
+*.profraw
+*.profdata
+callgrind.out.*
+cachegrind.out.*
+
+# ===== Конфиденциальное =====
+.env
+.env.local
+.env.*.local
+*.secret
+*.key
+*.pem
+secrets/
+credentials/
+
+# ===== Дампы =====
+core
+core.*
+*.dmp
+*.core
+
+# ===== Временные файлы =====
+*.bak
+*.old
+*.orig
+*.rej
+
+# ===== Тестовые артефакты =====
+test_output/
+coverage/
+htmlcov/

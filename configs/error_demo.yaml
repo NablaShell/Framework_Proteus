@@ -1,0 +1,19 @@
+version: "1.0"
+pipeline:
+  - id: "valid_step"
+    name: "Valid Step"
+    action: "print"
+    parameters:
+      message: "This will execute"
+
+  - id: "error_step"
+    name: "Error Step"
+    action: "print"
+    parameters: {}
+    # Missing message parameter - will fail
+
+  - id: "never_reached"
+    name: "Never Reached"
+    action: "print"
+    parameters:
+      message: "This should not execute"

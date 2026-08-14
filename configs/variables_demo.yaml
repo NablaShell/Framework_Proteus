@@ -1,0 +1,40 @@
+version: "1.0"
+variables:
+  project: "Project Proteus"
+  author: "Security Researcher"
+  year: 2024
+
+pipeline:
+  - id: "intro"
+    name: "Project Introduction"
+    action: "print"
+    parameters:
+      message: "Project: ${project}"
+    store_as: "intro_msg"
+
+  - id: "author_info"
+    name: "Author Information"
+    action: "set_variable"
+    parameters:
+      name: "author_info"
+      value: "${author} (${year})"
+
+  - id: "show_author"
+    name: "Show Author"
+    action: "print"
+    parameters:
+      message: "Author: ${author_info}"
+
+  - id: "create_summary"
+    name: "Create Summary"
+    action: "set_variable"
+    parameters:
+      name: "summary"
+      value: "${intro_msg} by ${author_info}"
+
+  - id: "print_summary"
+    name: "Print Summary"
+    action: "print"
+    parameters:
+      message: "Summary: ${summary}"
+    store_as: "final_summary"
