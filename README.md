@@ -1,7 +1,7 @@
 # Proteus Framework
 
 **Version:** 1.0.0 "Fulcrum"  
-**License:** Project Proteus Core Source-Available License Agreement v1.0  
+**License:** Source-available under FSL-1.1-ALv2.
 **Status:** Stable Release
 
 ## Overview
@@ -306,7 +306,11 @@ cargo test -- --nocapture
 
 ## License
 
-This project is licensed under the Project Proteus Core Source-Available License Agreement v1.0.
+Source-available under FSL-1.1-ALv2.
+Free for internal use, non-commercial education, and non-commercial research.
+Converts to Apache 2.0 after two years.
+
+Commercial use as a competing product requires a separate license.
 
 ## Contact
 
