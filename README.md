@@ -1,8 +1,8 @@
 # Proteus Framework
 
 **Version:** 1.0.0 "Fulcrum"  
-**License:** Source-available under FSL-1.1-ALv2.
-**Status:** Stable Release
+**License:** Source-available under FSL-1.1-ALv2.  
+**Status:** Stable Release  
 
 ## Overview
 
