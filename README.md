@@ -315,4 +315,4 @@ Commercial use as a competing product requires a separate license.
 ## Contact
 
 - Issues: GitHub Issues
-- Security: nablashell@gmail.com
+- Security: nabla.shell@proton.me
